@@ -1,0 +1,132 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Hero from '@/pages/css-has/components/Hero.astro'
+import Panel from '@/pages/css-has/components/Panel.astro'
+import Section from '@/pages/css-has/components/Section.astro'
+---
+<BaseLayout title=":has()">
+  <div class="island">
+    <Hero color="bg-orange" />
+  </div>
+  <div class="island">
+    <Panel color="bg-yellow" overlap="fancy" />
+  </div>
+  <div class="island">
+    <Section color="bg-lavender" />
+  </div>
+</BaseLayout>
+
+
+<style is:global>
+
+  @layer theme {
+    :root {
+      --color-yellow: yellow;
+      --color-lavender: lavender;
+      --color-orange: orange;
+    }
+
+    main {
+      padding: 0 1rem;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+    .island {
+      display: contents;
+    }
+    /**
+    * In order to make the overlapping sections work, we do set a class on the element
+    * that we want to target.  This class won't be transformed by css modules.
+    */
+    .component-section.has-overlap {
+      position: relative;
+    }
+    .component-section.has-overlap:before {
+      background: var(--previous-section-background-color);
+      content: "";
+      display: block;
+      height: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(100% + var(--spacing-lg));
+      margin: 0 -1rem;
+      z-index: -1;
+    }
+    .component-section.has-overlap:after {
+      background: var(--next-section-background-color);
+      content: "";
+      display: block;
+      height: 50%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: calc(100% + 2rem);
+      margin: 0 -1rem;
+      z-index: -1;
+    }
+    .bg-yellow {
+      --section-color: var(--color-yellow);
+    }
+    .bg-lavender {
+      --section-color: var(--color-lavender);
+    }
+    .bg-orange {
+      --section-color: var(--color-orange);
+    }
+    /**
+    * :has() in order to target the an island that has an overlapping component.
+    * Scoped to when only having direct children to avoid potential bugs with nested components.
+    * This essentially discovers that the overlapping section follows a yellow section.
+    */
+    .island:has(> .bg-yellow) + .component-section.has-overlap,
+    .island:has(> .bg-yellow) + .island:has(> .component-section.has-overlap),
+    .bg-yellow + .island:has(> .component-section.has-overlap),
+    .bg-yellow + .component-section.has-overlap {
+      --previous-section-background-color: var(--color-yellow);
+    }
+    /**
+    * :has() in order to target the an island that has an overlapping component.
+    * Scoped to when only having direct children to avoid potential bugs with nested components.
+    * This essentially discovers that the overlapping section precedes a yellow section.
+    * Continues to work if the overlapping section is wrapped by an island.
+    */
+    .island:has(> .component-section.has-overlap):has(+ .bg-yellow),
+    .island:has(> .component-section.has-overlap):has(+ .island > .bg-yellow),
+    .component-section.has-overlap:has(+ .island > .bg-yellow),
+    .component-section.has-overlap:has(+ .bg-yellow) {
+      --next-section-background-color: var(--color-yellow);
+    }
+    /**
+    * Lavender
+    */
+    .island:has(> .bg-lavender) + .component-section.has-overlap,
+    .island:has(> .bg-lavender) + .island:has(> .component-section.has-overlap),
+    .bg-lavender + .island:has(.component-section.has-overlap),
+    .bg-lavender + .component-section.has-overlap {
+      --previous-section-background-color: var(--color-lavender);
+    }
+    .island:has(.component-section.has-overlap):has(+ .island > .bg-lavender),
+    .island:has(.component-section.has-overlap):has(+ .bg-lavender),
+    .component-section.has-overlap:has(+ .island > .bg-lavender)
+    .component-section.has-overlap:has(+ .bg-lavender) {
+      --next-section-background-color: var(--color-lavender);
+    }
+    /**
+    * Orange
+    */
+    .island:has(> .bg-orange) + .component-section.has-overlap,
+    .island:has(> .bg-orange) + .island:has(> .component-section.has-overlap),
+    .bg-orange + .island:has(.component-section.has-overlap),
+    .bg-orange + .component-section.has-overlap {
+      --previous-section-background-color: var(--color-orange);
+    }
+    .island:has(.component-section.has-overlap):has(+ .island > .bg-orange),
+    .island:has(.component-section.has-overlap):has(+ .bg-orange),
+    .component-section.has-overlap:has(+ .island > .bg-orange)
+    .component-section.has-overlap:has(+ .bg-orange) {
+      --next-section-background-color: var(--color-orange);
+    }
+  }
+</style>

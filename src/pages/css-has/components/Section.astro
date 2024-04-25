@@ -1,0 +1,19 @@
+---
+import { type BackgroundColors } from '@/pages/css-has/types';
+
+const color: BackgroundColors = Astro.props.color || 'bg-orange';
+---
+
+<section class=`component-section section ${color}`>
+  <h1>Section</h1>
+</section>
+
+<style>
+  .section {
+    background: var(--section-color);
+    text-align: center;
+    padding: var(--spacing-3xl) 0;
+    width: calc(100% + var(--spacing-lg));
+    margin: 0 calc(var(--spacing-md) * -1);
+  }
+</style>

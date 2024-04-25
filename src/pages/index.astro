@@ -1,0 +1,40 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+	<h1>CSS Playground</h1>
+	<ul class="links">
+		<li><a href="/css-has">:has()</a></li>
+		<li><a href="/css-subgrid">subgrid</a></li>
+	</div>
+</BaseLayout>
+
+
+<style>
+	@layer theme {
+		body {
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+
+		main {
+			max-width: var(--max-width);
+			margin: 0 auto;
+			padding: var(--spacing-lg);
+		}
+
+		ul {
+			margin: var(--spacing-lg) 0;
+			padding: 0 var(--spacing-md);
+		}
+
+		li {
+			list-style: none;
+			margin: var(--spacing-md) 0;
+		}
+	}
+</style>

@@ -1,0 +1,44 @@
+---
+import { type BackgroundColors } from '@/pages/css-has/types';
+
+const color: BackgroundColors = Astro.props.color || 'bg-lavender';
+const overlap: 'fancy' | 'default' | 'none' = Astro.props.overlap || 'default';
+---
+
+<section class=`component-section panel ${color} overlap-${overlap} ${overlap !== 'none' ? 'has-overlap' : ''}`>
+  <div class="inner">
+    <h1>Panel</h1>
+  </div>
+</section>
+
+
+<style>
+  @layer components {
+    .inner {
+      background: var(--section-color);
+      text-align: center;
+      padding: var(--spacing-3xl) var(--spacing-lg);
+      margin: 0 calc(var(--spacing-md) * -1);
+      width: calc(100% + var(--spacing-lg));
+    }
+    .panel:not(.overlap-none) .inner {
+      border-radius: var(--border-radius-lg); 
+      width: 100%;
+      margin: 0;
+      position: relative;
+    }
+
+    .panel.overlap-fancy .inner {
+      box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
+      margin: 0 auto;
+      width: 90%;
+    }
+
+    .overlap-fancy:before {
+      height: 40%;
+    }
+    .overlap-fancy:after {
+      height: 60%;
+    }
+  }
+</style>

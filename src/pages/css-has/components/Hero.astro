@@ -1,0 +1,19 @@
+---
+import { type BackgroundColors } from '@/pages/css-has/types';
+
+const color: BackgroundColors = Astro.props.color || 'bg-lavender';
+---
+
+<div class=`hero component-section ${color}`>
+  <h1>Hero</h1>
+</div>
+
+<style>
+  .hero {
+    background: var(--section-color);
+    padding: var(--spacing-5xl);
+    margin: 0 calc(var(--spacing-md) * -1);
+    text-align: center;
+    width: calc(100% + var(--spacing-lg));
+  }
+</style>

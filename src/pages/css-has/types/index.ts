@@ -1,0 +1,1 @@
+export type BackgroundColors = 'bg-lavender' | 'bg-orange' | 'bg-yellow';
