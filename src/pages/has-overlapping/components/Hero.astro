@@ -2,10 +2,11 @@
 import { type BackgroundColors } from '@/pages/has-overlapping/types';
 
 const color: BackgroundColors = Astro.props.color || 'bg-lavender';
+const title = Astro.props.title || 'Hero';
 ---
 
 <div class=`hero component-section ${color}`>
-  <h1>Hero</h1>
+  <h1>{title}</h1>
 </div>
 
 <style>

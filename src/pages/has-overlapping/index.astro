@@ -3,10 +3,14 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 import Hero from '@/pages/has-overlapping/components/Hero.astro'
 import Panel from '@/pages/has-overlapping/components/Panel.astro'
 import Section from '@/pages/has-overlapping/components/Section.astro'
+
+export const prerender = import.meta.env.PRERENDER_ENABLED;
+
+const random = Math.floor(Math.random() * 3);
 ---
 <BaseLayout title=":has()">
   <div class="island">
-    <Hero color="bg-orange" />
+    <Hero color="bg-orange" title={`The random number is ${random}`} />
   </div>
   <div class="island">
     <Panel color="bg-yellow" overlap="fancy" />
