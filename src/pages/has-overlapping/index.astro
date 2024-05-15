@@ -4,6 +4,8 @@ import Hero from '@/pages/has-overlapping/components/Hero.astro'
 import Panel from '@/pages/has-overlapping/components/Panel.astro'
 import Section from '@/pages/has-overlapping/components/Section.astro'
 
+export const prerender = import.meta.env.PRERENDER_ENABLED;
+
 const random = Math.floor(Math.random() * 10);
 ---
 <BaseLayout title=":has()">
