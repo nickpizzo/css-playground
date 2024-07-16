@@ -2,7 +2,7 @@ import contentful from "contentful";
 
 export const getPagePaths = async () => {
   const data = await client().withoutUnresolvableLinks.getEntries({
-    content_type: "Page",
+    content_type: "page",
   });
 
   return data.items.map((item) => ({
