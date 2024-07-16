@@ -15,9 +15,11 @@ if (prerender === "true") {
   // https://astro.build/config
   config = defineConfig({
     output: "server",
-    adapter: node({
-      mode: "standalone",
-    }),
+    adapter: process.env.NETLIFY
+      ? netlify()
+      : node({
+          mode: "standalone",
+        }),
   });
 }
 
