@@ -8,13 +8,13 @@ let config;
 
 if (prerender === "true") {
   // https://astro.build/config
-  config = defineConfig();
-} else {
-  // https://astro.build/config
   config = defineConfig({
     output: "server",
     adapter: netlify(),
   });
+} else {
+  // https://astro.build/config
+  config = defineConfig();
 }
 
 export default config;
