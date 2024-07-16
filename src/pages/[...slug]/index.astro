@@ -28,8 +28,8 @@ if (!data) {
       )
     }
     <img
-      src={`${data?.heroImage?.fields?.file?.url}?w=1000&h=562&fit=crop`}
-      alt={data.heroImage?.fields?.title}
+      src={`${(data?.heroImage as any)?.fields?.file?.url}?w=1000&h=562&fit=crop`}
+      alt={(data?.heroImage as any)?.fields?.title}
       slot="image"
     />
   </Hero>
