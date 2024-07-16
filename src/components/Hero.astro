@@ -32,5 +32,20 @@ const subheading = await Astro.slots.render("subheading");
     & :global(> * + *) {
       margin-block-start: var(--spacing-md, 1rem);
     }
+
+    & :global(h1) {
+      font-size: var(--font-3xl);
+      line-height: 1.2;
+      margin-top: 0.5rem;
+    }
+  }
+
+  .eyebrow {
+    color: violet;
+    font-size: var(--font-md);
+  }
+
+  .subheading {
+    font-size: var(--font-lg);
   }
 </style>
