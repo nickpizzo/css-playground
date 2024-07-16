@@ -12,7 +12,7 @@ export const getPagePaths = async () => {
 
 export const getPageData = async (slug: string) => {
   return await client().withoutUnresolvableLinks.getEntries({
-    content_type: "Page",
+    content_type: "page",
     "fields.slug": slug,
   });
 }
