@@ -1,0 +1,36 @@
+---
+const eyebrow = await Astro.slots.render("eyebrow");
+const subheading = await Astro.slots.render("subheading");
+---
+
+<section class="hero">
+  <div class="content">
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <slot name="heading" />
+    {subheading && <p class="subheading">{subheading}</p>}
+  </div>
+  <div class="image">
+    <slot name="image" />
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+    padding: 0 var(--spacing-lg);
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    & :global(> * + *) {
+      margin-block-start: var(--spacing-md, 1rem);
+    }
+  }
+</style>

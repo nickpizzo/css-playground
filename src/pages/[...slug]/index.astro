@@ -1,4 +1,7 @@
 ---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Hero from "@/components/Hero.astro";
+
 import { getPagePaths, getPageData } from "./_data";
 const slug = (Astro.params.slug || "/") as string;
 
@@ -7,16 +10,27 @@ export const getStaticPaths = async () => {
 };
 
 const data = await getPageData(slug);
+
+if (!data) {
+  return new Response("not found", {
+    status: 404,
+  });
+}
 ---
 
-<pre>
-  {JSON.stringify(data, null, 2)}
-</pre>
-
-<style>
-  pre {
-    background: var(--color-lavender);
-    padding: var(--spacing-lg);
-    border-radius: var(--border-radius-lg);
-  }
-</style>
+<BaseLayout title={data.title}>
+  <Hero>
+    {data.eyebrow && <Fragment slot="eyebrow">{data.eyebrow}</Fragment>}
+    <h1 slot="heading">{data.heading}</h1>
+    {
+      data.subheading && (
+        <Fragment slot="subheading">{data.subheading}</Fragment>
+      )
+    }
+    <img
+      src={`${data?.heroImage?.fields?.file?.url}?w=1000&h=562&fit=crop`}
+      alt={data.heroImage?.fields?.title}
+      slot="image"
+    />
+  </Hero>
+</BaseLayout>
