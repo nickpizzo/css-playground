@@ -1,0 +1,22 @@
+---
+import { getPagePaths, getPageData } from "./_data";
+const slug = (Astro.params.slug || "/") as string;
+
+export const getStaticPaths = async () => {
+  return await getPagePaths();
+};
+
+const data = await getPageData(slug);
+---
+
+<pre>
+  {JSON.stringify(data, null, 2)}
+</pre>
+
+<style>
+  pre {
+    background: var(--color-lavender);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-lg);
+  }
+</style>
