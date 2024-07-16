@@ -1,0 +1,13 @@
+<article class="prose">
+  <slot />
+</article>
+
+<style is:global>
+  .prose > * + * {
+    margin-block-start: var(--flow-space, 2em);
+  }
+
+  .prose {
+    margin-block-end: var(--flow-space, 2em);
+  }
+</style>
