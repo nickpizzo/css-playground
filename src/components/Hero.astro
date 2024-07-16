@@ -48,4 +48,10 @@ const subheading = await Astro.slots.render("subheading");
   .subheading {
     font-size: var(--font-lg);
   }
+
+  .image :global(img) {
+    width: 100%;
+    display: block;
+    height: auto;
+  }
 </style>
