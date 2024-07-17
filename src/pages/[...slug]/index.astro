@@ -19,6 +19,9 @@ if (!data) {
 ---
 
 <BaseLayout title={data.title}>
+  <div>netlify: {import.meta.env.NETLIFY}</div>
+  <div>use preview: {import.meta.env.CF_USE_PREVIEW}</div>
+  <div>prerender enabled: {import.meta.env.PRERENDER_ENABLED}</div>
   <Hero>
     <Fragment slot="eyebrow">{data.eyebrow}</Fragment>
     <h1 slot="heading">{data.heading}</h1>
